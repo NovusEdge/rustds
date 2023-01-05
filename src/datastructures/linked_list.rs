@@ -51,21 +51,36 @@ impl<T: Copy> SinglyLinkedList<T> {
 
 }
 
-impl<T> DoublyLinkedList<T> {
+impl<T: Copy> DoublyLinkedList<T> {
+    pub fn new(initial_element: T) -> Self  {
+        DoublyLinkedList { element: initial_element, next: None, prev: None }
+    }
 
+    pub fn prepend(&self, element: T) -> DoublyLinkedList<T> {
+        DoublyLinkedList { 
+            element: self.element,
+            next: Some(Rc::new(DoublyLinkedList {
+                element,
+                next: self.next.clone(),
+                prev: None, 
+            })),
+            prev: None,
+        }
+    }
 }
+
 
 #[allow(unused_variables)]
 impl<T> std::fmt::Display for SinglyLinkedList<T> {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
-        todo!();
+        unimplemented!();
     }
 }
 
 #[allow(unused_variables)]
 impl<T> std::fmt::Display for DoublyLinkedList<T> {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
-        todo!();
+        unimplemented!();
     }
 }
 
